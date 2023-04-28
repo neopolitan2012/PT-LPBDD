@@ -178,8 +178,6 @@ drop table T_E_ENSEIGNE_ENS cascade constraints;
 
 drop index INSTALLE_FK;
 
-drop index LIE_FK;
-
 drop index DISPOSE_FK;
 
 drop table T_E_FOURNISSEUR_FOU cascade constraints;
@@ -665,7 +663,7 @@ create table T_E_SEMAINE_SEM
 create table T_E_THEMATIQUE_THE 
 (
    NUMERO_THEMATIQUE    INTEGER              not null,
-   LIBELLE_THEMATIQUE   CLOB,
+   LIBELLE_THEMATIQUE   VARCHAR2(256),
    constraint PK_T_E_THEMATIQUE_THE primary key (NUMERO_THEMATIQUE)
 );
 
@@ -1305,3 +1303,31 @@ alter table T_J_SYSTEME_PRESTATAIRE_SPR
    add constraint FK_T_J_SYST_SYSTEME_P_T_R_SYST foreign key (NUMERO_SYSTEME)
       references T_R_SYSTEME_SYS (NUMERO_SYSTEME);
 
+--- Contraintes rajoutées
+
+alter table T_J_BUDGET_BUD
+    add constraint CK_T_J_BUDGET_BUD_ANN check (NUMERO_ANNEE between 2019 and 2022 );
+
+alter table T_E_PRODUIT_PRO
+    add constraint UQ_T_E_PRODUIT_PRO_CODE_GEN unique (GEN_CODE);
+   
+alter table T_E_FOURNISSEUR_FOU
+    add constraint UQ_T_E_FOURNISSEUR_FOU_NOM_GROUPE unique (NOM_GROUPE);
+
+alter table T_R_SECTEUR_ACTIVITE_SEC
+    add constraint UQ_T_R_SECTEUR_ACTIVITE_SEC_LIBELLE_SECTEUR_ACTIVITE unique (LIBELLE_SECTEUR_ACTIVITE);
+    
+alter table T_R_TYPE_ACTION_TAC
+    add constraint UQ_T_R_TYPE_ACTION_TAC_LIBELLE_TYPE_ACTION unique (LIBELLE_TYPE_ACTION);
+    
+alter table T_E_THEMATIQUE_THE
+    add constraint UQ_T_E_THEMATIQUE_THE_LIBELLE_THEMATIQUE unique (LIBELLE_THEMATIQUE);
+
+alter table T_E_GAMME_GAM
+    add constraint UQ_T_E_GAMME_GAM_LIBELLE_GAMME unique (LIBELLE_GAMME);
+    
+alter table T_R_POSTE_POS
+    add constraint UQ_T_R_POSTE_POS_LIBELLE_POSTE unique (LIBELLE_POSTE);
+
+    
+CREATE INDEX IDX_T_E_PRESTATAIRE_EXTERNE_EXT_RAISON_SOCIALE ON T_E_PRESTATAIRE_EXTERNE_EXT (RAISON_SOCIALE_PRESTA_EXTERNE);
