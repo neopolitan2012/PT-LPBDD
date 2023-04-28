@@ -609,6 +609,7 @@ create index EMPLOYE_FK on T_E_PRESTATAIRE_PAPIER_PAP (
 create table T_E_PRESTATAIRE_PRE 
 (
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NOM_CONTACT          VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_PRE primary key (NUMERO_PRESTATAIRE)
 );
 
