@@ -1,11 +1,11 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  27/04/2023 11:54:34                      */
+/* Date de création :  28/04/2023 14:31:57                      */
 /*==============================================================*/
 
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
-   drop constraint FK_T_E_ACTI_DEFINI_T_E_SECT;
+   drop constraint FK_T_E_ACTI_DEFINI_T_R_SECT;
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
    drop constraint FK_T_E_ACTI_DEMANDE_T_E_FOUR;
@@ -224,8 +224,6 @@ drop index EST_COMPOSE_FK;
 
 drop table T_E_PRODUIT_PRO cascade constraints;
 
-drop table T_E_SECTEUR_ACTIVITE_SEC cascade constraints;
-
 drop table T_E_SEMAINE_SEM cascade constraints;
 
 drop table T_E_THEMATIQUE_THE cascade constraints;
@@ -317,6 +315,8 @@ drop table T_R_LOGICIEL_LOG cascade constraints;
 drop table T_R_POSTE_POS cascade constraints;
 
 drop table T_R_QUALITE_TECHNIQUE_QUA cascade constraints;
+
+drop table T_R_SECTEUR_ACTIVITE_SEC cascade constraints;
 
 drop table T_R_SPECIALITE_SPE cascade constraints;
 
@@ -422,7 +422,6 @@ create table T_E_ENSEIGNE_ENS
 (
    CODE_ENSEIGNE        INTEGER              not null,
    NOM_ENSEIGNE         VARCHAR2(256),
-   ADRESSE_ENSEIGNE     VARCHAR2(256),
    GROUPE               VARCHAR2(256),
    NUMERO_STANDARD      VARCHAR2(10),
    constraint PK_T_E_ENSEIGNE_ENS primary key (CODE_ENSEIGNE)
@@ -529,8 +528,6 @@ create index REALISE_FK on T_E_ORDRE_PUBLICITAIRE_ORD (
 create table T_E_PRESATAIRE_TECHNIQUE_TEC 
 (
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   CODE_ADRESSE         INTEGER,
-   RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESATAIRE_TECHNIQUE_TE primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -542,8 +539,6 @@ create table T_E_PRESTATAIRE_AUDIO_AUD
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
    CODE_QUALITE_TECHNIQUE INTEGER              not null,
-   CODE_ADRESSE         INTEGER,
-   RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_AUDIO_AUD primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -585,8 +580,6 @@ create index DOMICILE_FK on T_E_PRESTATAIRE_EXTERNE_EXT (
 create table T_E_PRESTATAIRE_IMAGE_IMA 
 (
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   CODE_ADRESSE         INTEGER,
-   RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_IMAGE_IMA primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -607,8 +600,6 @@ create table T_E_PRESTATAIRE_PAPIER_PAP
 (
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
-   CODE_ADRESSE         INTEGER,
-   RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    RECYCLAGE            VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_PAPIER_PAP primary key (NUMERO_PRESTATAIRE)
 );
@@ -654,16 +645,6 @@ create index EST_COMPOSE_FK on T_E_PRODUIT_PRO (
 /*==============================================================*/
 create index VEND_FK on T_E_PRODUIT_PRO (
    CODE_ENSEIGNE ASC
-);
-
-/*==============================================================*/
-/* Table : T_E_SECTEUR_ACTIVITE_SEC                             */
-/*==============================================================*/
-create table T_E_SECTEUR_ACTIVITE_SEC 
-(
-   NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   LIBELLE_SECTEUR_ACTIVITE VARCHAR2(256),
-   constraint PK_T_E_SECTEUR_ACTIVITE_SEC primary key (NUMERO_SECTEUR_ACTIVITE)
 );
 
 /*==============================================================*/
@@ -1075,6 +1056,16 @@ create table T_R_QUALITE_TECHNIQUE_QUA
 );
 
 /*==============================================================*/
+/* Table : T_R_SECTEUR_ACTIVITE_SEC                             */
+/*==============================================================*/
+create table T_R_SECTEUR_ACTIVITE_SEC 
+(
+   NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
+   LIBELLE_SECTEUR_ACTIVITE VARCHAR2(256),
+   constraint PK_T_R_SECTEUR_ACTIVITE_SEC primary key (NUMERO_SECTEUR_ACTIVITE)
+);
+
+/*==============================================================*/
 /* Table : T_R_SPECIALITE_SPE                                   */
 /*==============================================================*/
 create table T_R_SPECIALITE_SPE 
@@ -1115,8 +1106,8 @@ create table T_R_TYPE_MACHINE_TYM
 );
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
-   add constraint FK_T_E_ACTI_DEFINI_T_E_SECT foreign key (NUMERO_SECTEUR_ACTIVITE)
-      references T_E_SECTEUR_ACTIVITE_SEC (NUMERO_SECTEUR_ACTIVITE);
+   add constraint FK_T_E_ACTI_DEFINI_T_R_SECT foreign key (NUMERO_SECTEUR_ACTIVITE)
+      references T_R_SECTEUR_ACTIVITE_SEC (NUMERO_SECTEUR_ACTIVITE);
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
    add constraint FK_T_E_ACTI_DEMANDE_T_E_FOUR foreign key (CODE_FOURNISSEUR)
@@ -1314,13 +1305,3 @@ alter table T_J_SYSTEME_PRESTATAIRE_SPR
    add constraint FK_T_J_SYST_SYSTEME_P_T_R_SYST foreign key (NUMERO_SYSTEME)
       references T_R_SYSTEME_SYS (NUMERO_SYSTEME);
 
-alter table T_E_CONTACT_CON
-    add constraint CK_T_E_CONTACT_CON_TEL check (NUMERO_CONTACT like  '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]');
-
-alter table T_J_BUDGET_BUD
-    add constraint CK_T_J_BUDGET_BUD_ANN check (NUMERO_ANNEE between 2019 and 2022 );
-    
-alter table T_E_PRODUIT_PRO
-    add constraint UQ_T_E_PRODUIT_PRO_CODE_GEN unique (GEN_CODE);
-    
-CREATE INDEX IDX_T_E_PRESTATAIRE_EXTERNE_EXT_RAISON_SOCIALE ON T_E_PRESTATAIRE_EXTERNE_EXT (RAISON_SOCIALE_PRESTA_EXTERNE);
