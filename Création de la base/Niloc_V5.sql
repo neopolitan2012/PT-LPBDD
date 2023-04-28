@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  28/04/2023 15:47:04                      */
+/* Date de création :  28/04/2023 16:00:52                      */
 /*==============================================================*/
 
 
@@ -394,7 +394,7 @@ create table T_E_ANNEE_ANE
 create table T_E_CONTACT_CON 
 (
    NUMERO_CONTACT       INTEGER              not null,
-   NOM_GROUPE           VARCHAR2(256)        not null,
+   NUMERO_GROUPE        INTEGER              not null,
    CODE_POSTE           INTEGER              not null,
    NOM_CONTACT          VARCHAR2(256),
    TELEPHONE_CONTACT    VARCHAR2(10),
@@ -405,7 +405,7 @@ create table T_E_CONTACT_CON
 /* Index : TRAVAILLE_POUR_FK                                    */
 /*==============================================================*/
 create index TRAVAILLE_POUR_FK on T_E_CONTACT_CON (
-   NOM_GROUPE ASC
+   NUMERO_GROUPE ASC
 );
 
 /*==============================================================*/
@@ -435,7 +435,7 @@ create table T_E_FOURNISSEUR_FOU
    CODE_FOURNISSEUR     INTEGER              not null,
    CODE_ENSEIGNE        INTEGER              not null,
    CODE_ADRESSE         INTEGER              not null,
-   NOM_GROUPE           VARCHAR2(256)        not null,
+   NUMERO_GROUPE        INTEGER              not null,
    NOM_FOURNISSEUR      VARCHAR2(256),
    PRENOM_FOURNISSEUR   VARCHAR2(256),
    TELEPHONE_FOURNISSEUR VARCHAR2(10),
@@ -454,7 +454,7 @@ create index DISPOSE_FK on T_E_FOURNISSEUR_FOU (
 /* Index : LIE_FK                                               */
 /*==============================================================*/
 create index LIE_FK on T_E_FOURNISSEUR_FOU (
-   NOM_GROUPE ASC
+   NUMERO_GROUPE ASC
 );
 
 /*==============================================================*/
@@ -479,8 +479,9 @@ create table T_E_GAMME_GAM
 /*==============================================================*/
 create table T_E_GROUPE_GRO 
 (
-   NOM_GROUPE           VARCHAR2(256)        not null,
-   constraint PK_T_E_GROUPE_GRO primary key (NOM_GROUPE)
+   NUMERO_GROUPE        INTEGER              not null,
+   NOM_GROUPE           VARCHAR2(256),
+   constraint PK_T_E_GROUPE_GRO primary key (NUMERO_GROUPE)
 );
 
 /*==============================================================*/
@@ -1126,8 +1127,8 @@ alter table T_E_CONTACT_CON
       references T_R_POSTE_POS (CODE_POSTE);
 
 alter table T_E_CONTACT_CON
-   add constraint FK_T_E_CONT_TRAVAILLE_T_E_GROU foreign key (NOM_GROUPE)
-      references T_E_GROUPE_GRO (NOM_GROUPE);
+   add constraint FK_T_E_CONT_TRAVAILLE_T_E_GROU foreign key (NUMERO_GROUPE)
+      references T_E_GROUPE_GRO (NUMERO_GROUPE);
 
 alter table T_E_FOURNISSEUR_FOU
    add constraint FK_T_E_FOUR_DISPOSE_T_E_ENSE foreign key (CODE_ENSEIGNE)
@@ -1138,8 +1139,8 @@ alter table T_E_FOURNISSEUR_FOU
       references T_E_ADRESSE_ADR (CODE_ADRESSE);
 
 alter table T_E_FOURNISSEUR_FOU
-   add constraint FK_T_E_FOUR_LIE_T_E_GROU foreign key (NOM_GROUPE)
-      references T_E_GROUPE_GRO (NOM_GROUPE);
+   add constraint FK_T_E_FOUR_LIE_T_E_GROU foreign key (NUMERO_GROUPE)
+      references T_E_GROUPE_GRO (NUMERO_GROUPE);
 
 alter table T_E_ORDRE_PUBLICITAIRE_ORD
    add constraint FK_T_E_ORDR_COMPOSE_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
@@ -1304,7 +1305,7 @@ alter table T_J_SYSTEME_PRESTATAIRE_SPR
 alter table T_J_SYSTEME_PRESTATAIRE_SPR
    add constraint FK_T_J_SYST_SYSTEME_P_T_R_SYST foreign key (NUMERO_SYSTEME)
       references T_R_SYSTEME_SYS (NUMERO_SYSTEME);
-      
+
 alter table T_E_FOURNISSEUR_FOU
     add constraint CK_T_E_FOURNISSEUR_FOU_TEL check (TELEPHONE_FOURNISSEUR like  '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]');
 
@@ -1331,7 +1332,7 @@ alter table T_E_GAMME_GAM
     
 alter table T_R_POSTE_POS
     add constraint UQ_T_R_POSTE_POS_LIBELLE_POSTE unique (LIBELLE_POSTE);
-
+ 
 alter table T_R_LOGICIEL_LOG
     add constraint UQ_T_R_LOGICIEL_LOG_LIBELLE_LOGICIEL unique (LIBELLE_LOGICIEL);
 
@@ -1349,3 +1350,4 @@ alter table T_R_QUALITE_TECHNIQUE_QUA
 
 
 CREATE INDEX IDX_T_E_PRESTATAIRE_EXTERNE_EXT_RAISON_SOCIALE ON T_E_PRESTATAIRE_EXTERNE_EXT (RAISON_SOCIALE_PRESTA_EXTERNE);
+
