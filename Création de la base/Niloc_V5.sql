@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  28/04/2023 16:00:52                      */
+/* Date de création :  28/04/2023 16:51:24                      */
 /*==============================================================*/
 
 
@@ -609,7 +609,7 @@ create index EMPLOYE_FK on T_E_PRESTATAIRE_PAPIER_PAP (
 create table T_E_PRESTATAIRE_PRE 
 (
    NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   NOM_CONTACT          VARCHAR2(256),
+   NOM_CONTACT          VARCHAR2( 256),
    constraint PK_T_E_PRESTATAIRE_PRE primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -1094,6 +1094,7 @@ create table T_R_TYPE_ACTION_TAC
 (
    NUMERO_TYPE_ACTION   INTEGER              not null,
    LIBELLE_TYPE_ACTION  VARCHAR2(256),
+   LETTRE_ACTION        CHAR(1),
    constraint PK_T_R_TYPE_ACTION_TAC primary key (NUMERO_TYPE_ACTION)
 );
 
@@ -1307,8 +1308,9 @@ alter table T_J_SYSTEME_PRESTATAIRE_SPR
    add constraint FK_T_J_SYST_SYSTEME_P_T_R_SYST foreign key (NUMERO_SYSTEME)
       references T_R_SYSTEME_SYS (NUMERO_SYSTEME);
 
+
 alter table T_E_FOURNISSEUR_FOU
-    add constraint CK_T_E_FOURNISSEUR_FOU_TEL check (TELEPHONE_FOURNISSEUR like  '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]');
+    add constraint CK_T_E_FOURNISSEUR_FOU_TEL check (REGEXP_LIKE(TELEPHONE_FOURNISSEUR, '^[0-9]{10}$'));
 
 alter table T_J_BUDGET_BUD
     add constraint CK_T_J_BUDGET_BUD_ANN check (NUMERO_ANNEE between 2019 and 2022 );
@@ -1316,7 +1318,7 @@ alter table T_J_BUDGET_BUD
 alter table T_E_PRODUIT_PRO
     add constraint UQ_T_E_PRODUIT_PRO_CODE_GEN unique (GEN_CODE);
    
-alter table T_E_FOURNISSEUR_FOU
+alter table T_E_GROUPE_GRO
     add constraint UQ_T_E_FOURNISSEUR_FOU_NOM_GROUPE unique (NOM_GROUPE);
 
 alter table T_R_SECTEUR_ACTIVITE_SEC
