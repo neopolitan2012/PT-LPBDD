@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  15/05/2023 09:16:05                      */
+/* Date de création :  15/05/2023 11:51:48                      */
 /*==============================================================*/
 
 
@@ -332,11 +332,11 @@ drop table T_R_TYPE_MACHINE_TYM cascade constraints;
 create table T_E_ACTION_PUBLICITAIRE_ACT 
 (
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
    NUMERO_THEMATIQUE    INTEGER,
    NUMERO_GAMME         INTEGER              not null,
-   constraint PK_T_E_ACTION_PUBLICITAIRE_ACT primary key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+   constraint PK_T_E_ACTION_PUBLICITAIRE_ACT primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
 );
 
 /*==============================================================*/
@@ -364,7 +364,7 @@ create index DEFINI_FK on T_E_ACTION_PUBLICITAIRE_ACT (
 /* Index : DEMANDE_FK                                           */
 /*==============================================================*/
 create index DEMANDE_FK on T_E_ACTION_PUBLICITAIRE_ACT (
-   CODE_FOURNISSEUR ASC
+   NUMERO_FOURNISSEUR ASC
 );
 
 /*==============================================================*/
@@ -372,11 +372,11 @@ create index DEMANDE_FK on T_E_ACTION_PUBLICITAIRE_ACT (
 /*==============================================================*/
 create table T_E_ADRESSE_ADR 
 (
-   CODE_ADRESSE         INTEGER              not null,
+   NUMERO_ADRESSE       INTEGER              not null,
    RUE                  VARCHAR2(256),
    VILLE                VARCHAR2(256),
    CP                   CHAR(5),
-   constraint PK_T_E_ADRESSE_ADR primary key (CODE_ADRESSE)
+   constraint PK_T_E_ADRESSE_ADR primary key (NUMERO_ADRESSE)
 );
 
 /*==============================================================*/
@@ -384,7 +384,7 @@ create table T_E_ADRESSE_ADR
 /*==============================================================*/
 create table T_E_ANNEE_ANE 
 (
-   NUMERO_ANNEE         VARCHAR2(4)          not null,
+   NUMERO_ANNEE         CHAR(4)              not null,
    constraint PK_T_E_ANNEE_ANE primary key (NUMERO_ANNEE)
 );
 
@@ -394,10 +394,10 @@ create table T_E_ANNEE_ANE
 create table T_E_CONTACT_CON 
 (
    NUMERO_CONTACT       INTEGER              not null,
-   CODE_POSTE           INTEGER              not null,
+   NUMERO_POSTE         INTEGER              not null,
    NUMERO_GROUPE        INTEGER,
    NOM_CONTACT          VARCHAR2(256),
-   TELEPHONE_CONTACT    VARCHAR2(10),
+   TELEPHONE_CONTACT    CHAR(10),
    constraint PK_T_E_CONTACT_CON primary key (NUMERO_CONTACT)
 );
 
@@ -412,7 +412,7 @@ create index TRAVAILLE_POUR_FK on T_E_CONTACT_CON (
 /* Index : EST_POUR_FK                                          */
 /*==============================================================*/
 create index EST_POUR_FK on T_E_CONTACT_CON (
-   CODE_POSTE ASC
+   NUMERO_POSTE ASC
 );
 
 /*==============================================================*/
@@ -420,12 +420,12 @@ create index EST_POUR_FK on T_E_CONTACT_CON (
 /*==============================================================*/
 create table T_E_ENSEIGNE_ENS 
 (
-   CODE_ENSEIGNE        INTEGER              not null,
+   NUMERO_ENSEIGNE      INTEGER              not null,
    NOM_ENSEIGNE         VARCHAR2(256),
    ADRESSE_ENSEIGNE     VARCHAR2(256),
-   GROUPE               VARCHAR2(256),
-   NUMERO_STANDARD      VARCHAR2(10),
-   constraint PK_T_E_ENSEIGNE_ENS primary key (CODE_ENSEIGNE)
+   GROUPE               VARCHAR2(100),
+   NUMERO_STANDARD      CHAR(10),
+   constraint PK_T_E_ENSEIGNE_ENS primary key (NUMERO_ENSEIGNE)
 );
 
 /*==============================================================*/
@@ -433,22 +433,22 @@ create table T_E_ENSEIGNE_ENS
 /*==============================================================*/
 create table T_E_FOURNISSEUR_FOU 
 (
-   CODE_FOURNISSEUR     INTEGER              not null,
-   CODE_ENSEIGNE        INTEGER              not null,
-   CODE_ADRESSE         INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
+   NUMERO_ENSEIGNE      INTEGER              not null,
+   NUMERO_ADRESSE       INTEGER              not null,
    NUMERO_GROUPE        INTEGER,
    NOM_FOURNISSEUR      VARCHAR2(256),
    PRENOM_FOURNISSEUR   VARCHAR2(256),
    TELEPHONE_FOURNISSEUR CHAR(10),
    MAIL_FOURNISSEUR     VARCHAR2(256),
-   constraint PK_T_E_FOURNISSEUR_FOU primary key (CODE_FOURNISSEUR)
+   constraint PK_T_E_FOURNISSEUR_FOU primary key (NUMERO_FOURNISSEUR)
 );
 
 /*==============================================================*/
 /* Index : DISPOSE_FK                                           */
 /*==============================================================*/
 create index DISPOSE_FK on T_E_FOURNISSEUR_FOU (
-   CODE_ENSEIGNE ASC
+   NUMERO_ENSEIGNE ASC
 );
 
 /*==============================================================*/
@@ -462,7 +462,7 @@ create index LIE_FK on T_E_FOURNISSEUR_FOU (
 /* Index : INSTALLE_FK                                          */
 /*==============================================================*/
 create index INSTALLE_FK on T_E_FOURNISSEUR_FOU (
-   CODE_ADRESSE ASC
+   NUMERO_ADRESSE ASC
 );
 
 /*==============================================================*/
@@ -480,7 +480,7 @@ create table T_E_GAMME_GAM
 /*==============================================================*/
 create table T_E_GROUPE_GRO 
 (
-   NOM_GROUPE           VARCHAR2(50)         not null,
+   NOM_GROUPE           VARCHAR2(100)        not null,
    NUMERO_GROUPE        INTEGER              not null,
    constraint PK_T_E_GROUPE_GRO primary key (NUMERO_GROUPE)
 );
@@ -500,9 +500,9 @@ create table T_E_OBJET_PUBLICITAIRE_OBJ
 create table T_E_ORDRE_PUBLICITAIRE_ORD 
 (
    NUMERO_ORDRE         INTEGER              not null,
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
    NOM_ORDRE            VARCHAR2(256),
    constraint PK_T_E_ORDRE_PUBLICITAIRE_ORD primary key (NUMERO_ORDRE)
@@ -513,7 +513,7 @@ create table T_E_ORDRE_PUBLICITAIRE_ORD
 /*==============================================================*/
 create index COMPOSE_FK on T_E_ORDRE_PUBLICITAIRE_ORD (
    NUMERO_SECTEUR_ACTIVITE ASC,
-   CODE_FOURNISSEUR ASC,
+   NUMERO_FOURNISSEUR ASC,
    NUMERO_ACTION_PUBLICITAIRE ASC
 );
 
@@ -529,8 +529,8 @@ create index REALISE_FK on T_E_ORDRE_PUBLICITAIRE_ORD (
 /*==============================================================*/
 create table T_E_PRESATAIRE_TECHNIQUE_TEC 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   CODE_ADRESSE         INTEGER,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
+   NUMERO_ADRESSE       INTEGER,
    RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESATAIRE_TECHNIQUE_TE primary key (NUMERO_PRESTATAIRE)
 );
@@ -540,7 +540,7 @@ create table T_E_PRESATAIRE_TECHNIQUE_TEC
 /*==============================================================*/
 create table T_E_PRESTATAIRE_AUDIO_AUD 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
    CODE_QUALITE_TECHNIQUE INTEGER              not null,
    CODE_ADRESSE         INTEGER,
@@ -567,8 +567,8 @@ create index EST_AGREE_FK on T_E_PRESTATAIRE_AUDIO_AUD (
 /*==============================================================*/
 create table T_E_PRESTATAIRE_EXTERNE_EXT 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   CODE_ADRESSE         INTEGER              not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
+   NUMERO_ADRESSE       INTEGER              not null,
    RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_EXTERNE_EXT primary key (NUMERO_PRESTATAIRE)
 );
@@ -577,7 +577,7 @@ create table T_E_PRESTATAIRE_EXTERNE_EXT
 /* Index : DOMICILE_FK                                          */
 /*==============================================================*/
 create index DOMICILE_FK on T_E_PRESTATAIRE_EXTERNE_EXT (
-   CODE_ADRESSE ASC
+   NUMERO_ADRESSE ASC
 );
 
 /*==============================================================*/
@@ -585,8 +585,8 @@ create index DOMICILE_FK on T_E_PRESTATAIRE_EXTERNE_EXT (
 /*==============================================================*/
 create table T_E_PRESTATAIRE_IMAGE_IMA 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   CODE_ADRESSE         INTEGER,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
+   NUMERO_ADRESSE       INTEGER,
    RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_IMAGE_IMA primary key (NUMERO_PRESTATAIRE)
 );
@@ -596,8 +596,7 @@ create table T_E_PRESTATAIRE_IMAGE_IMA
 /*==============================================================*/
 create table T_E_PRESTATAIRE_INTERNE_INT 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
-   NOM_PRESTATAIRE      VARCHAR2(256),
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    constraint PK_T_E_PRESTATAIRE_INTERNE_INT primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -606,11 +605,11 @@ create table T_E_PRESTATAIRE_INTERNE_INT
 /*==============================================================*/
 create table T_E_PRESTATAIRE_PAPIER_PAP 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
-   CODE_ADRESSE         INTEGER,
+   NUMERO_ADRESSE       INTEGER,
    RAISON_SOCIALE_PRESTA_EXTERNE VARCHAR2(256),
-   RECYCLAGE            VARCHAR2(256),
+   RECYCLAGE            CHAR(3),
    constraint PK_T_E_PRESTATAIRE_PAPIER_PAP primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -626,7 +625,8 @@ create index EMPLOYE_FK on T_E_PRESTATAIRE_PAPIER_PAP (
 /*==============================================================*/
 create table T_E_PRESTATAIRE_PRE 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
+   NOM_PRESTATAIRE      VARCHAR2(256),
    constraint PK_T_E_PRESTATAIRE_PRE primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -636,10 +636,10 @@ create table T_E_PRESTATAIRE_PRE
 create table T_E_PRODUIT_PRO 
 (
    REFERENCE_PRODUIT    INTEGER              not null,
-   CODE_ENSEIGNE        INTEGER              not null,
+   NUMERO_ENSEIGNE      INTEGER              not null,
    NUMERO_GAMME         INTEGER              not null,
    NOM_PRODUIT          VARCHAR2(256),
-   GEN_CODE             VARCHAR2(10),
+   GEN_CODE             CHAR(10),
    constraint PK_T_E_PRODUIT_PRO primary key (REFERENCE_PRODUIT)
 );
 
@@ -654,7 +654,7 @@ create index EST_COMPOSE_FK on T_E_PRODUIT_PRO (
 /* Index : VEND_FK                                              */
 /*==============================================================*/
 create index VEND_FK on T_E_PRODUIT_PRO (
-   CODE_ENSEIGNE ASC
+   NUMERO_ENSEIGNE ASC
 );
 
 /*==============================================================*/
@@ -675,7 +675,7 @@ create table T_E_SEMAINE_SEM
    NUMERO_SEMAINE       INTEGER              not null,
    DATE_DEBUT           DATE,
    DATE_FIN             DATE,
-   ANNEE                VARCHAR2(4),
+   ANNEE                CHAR(4),
    constraint PK_T_E_SEMAINE_SEM primary key (NUMERO_SEMAINE)
 );
 
@@ -694,19 +694,19 @@ create table T_E_THEMATIQUE_THE
 /*==============================================================*/
 create table T_J_BUDGET_BUD 
 (
-   CODE_FOURNISSEUR     INTEGER              not null,
-   NUMERO_ANNEE         VARCHAR2(4)          not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
+   NUMERO_ANNEE         CHAR(4)              not null,
    OBJECTIF             NUMBER(15,2),
    ENGAGE               NUMBER(15,2),
    FACTURE              NUMBER(15,2),
-   constraint PK_T_J_BUDGET_BUD primary key (CODE_FOURNISSEUR, NUMERO_ANNEE)
+   constraint PK_T_J_BUDGET_BUD primary key (NUMERO_FOURNISSEUR, NUMERO_ANNEE)
 );
 
 /*==============================================================*/
 /* Index : BUDGET_FK                                            */
 /*==============================================================*/
 create index BUDGET_FK on T_J_BUDGET_BUD (
-   CODE_FOURNISSEUR ASC
+   NUMERO_FOURNISSEUR ASC
 );
 
 /*==============================================================*/
@@ -773,11 +773,11 @@ create table T_J_DETAIL_ACTION_DAC
 (
    NUMERO_TYPE_ACTION   INTEGER              not null,
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
    PRIX_REVIENT_DETAIL_ACTION NUMBER(15,2),
    PRIX_VENTE_DETAIL_ACTION NUMBER(15,2),
-   constraint PK_T_J_DETAIL_ACTION_DAC primary key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_TYPE_ACTION, NUMERO_ACTION_PUBLICITAIRE)
+   constraint PK_T_J_DETAIL_ACTION_DAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_TYPE_ACTION, NUMERO_ACTION_PUBLICITAIRE)
 );
 
 /*==============================================================*/
@@ -792,7 +792,7 @@ create index DETAIL_ACTION_FK on T_J_DETAIL_ACTION_DAC (
 /*==============================================================*/
 create index DETAIL_ACTION2_FK on T_J_DETAIL_ACTION_DAC (
    NUMERO_SECTEUR_ACTIVITE ASC,
-   CODE_FOURNISSEUR ASC,
+   NUMERO_FOURNISSEUR ASC,
    NUMERO_ACTION_PUBLICITAIRE ASC
 );
 
@@ -826,11 +826,11 @@ create index DETAIL_THEMATIQUE2_FK on T_J_DETAIL_THEMATIQUE_DET (
 create table T_J_HISTORIQUE_ACTION_HAC 
 (
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
-   CODE_ETAT            INTEGER              not null,
+   NUMERO_ETAT          INTEGER              not null,
    DATE_HISTORIQUE_ACTION DATE,
-   constraint PK_T_J_HISTORIQUE_ACTION_HAC primary key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, CODE_ETAT)
+   constraint PK_T_J_HISTORIQUE_ACTION_HAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, NUMERO_ETAT)
 );
 
 /*==============================================================*/
@@ -838,7 +838,7 @@ create table T_J_HISTORIQUE_ACTION_HAC
 /*==============================================================*/
 create index HISTORIQUE_ACTION_FK on T_J_HISTORIQUE_ACTION_HAC (
    NUMERO_SECTEUR_ACTIVITE ASC,
-   CODE_FOURNISSEUR ASC,
+   NUMERO_FOURNISSEUR ASC,
    NUMERO_ACTION_PUBLICITAIRE ASC
 );
 
@@ -846,7 +846,7 @@ create index HISTORIQUE_ACTION_FK on T_J_HISTORIQUE_ACTION_HAC (
 /* Index : HISTORIQUE_ACTION2_FK                                */
 /*==============================================================*/
 create index HISTORIQUE_ACTION2_FK on T_J_HISTORIQUE_ACTION_HAC (
-   CODE_ETAT ASC
+   NUMERO_ETAT ASC
 );
 
 /*==============================================================*/
@@ -854,18 +854,18 @@ create index HISTORIQUE_ACTION2_FK on T_J_HISTORIQUE_ACTION_HAC (
 /*==============================================================*/
 create table T_J_HISTORIQUE_ETAT_HET 
 (
-   CODE_ETAT            INTEGER              not null,
+   NUMERO_ETAT          INTEGER              not null,
    NUMERO_ORDRE         INTEGER              not null,
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    DATE_HISTORIQUE_ETAT DATE,
-   constraint PK_T_J_HISTORIQUE_ETAT_HET primary key (CODE_ETAT, NUMERO_ORDRE, NUMERO_PRESTATAIRE)
+   constraint PK_T_J_HISTORIQUE_ETAT_HET primary key (NUMERO_ETAT, NUMERO_ORDRE, NUMERO_PRESTATAIRE)
 );
 
 /*==============================================================*/
 /* Index : HISTORIQUE_ETAT_FK                                   */
 /*==============================================================*/
 create index HISTORIQUE_ETAT_FK on T_J_HISTORIQUE_ETAT_HET (
-   CODE_ETAT ASC
+   NUMERO_ETAT ASC
 );
 
 /*==============================================================*/
@@ -887,7 +887,7 @@ create index HISTORIQUE_ETAT3_FK on T_J_HISTORIQUE_ETAT_HET (
 /*==============================================================*/
 create table T_J_LOGICIEL_PRESTATAIRE_LPR 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_LOGICIEL      INTEGER              not null,
    constraint PK_T_J_LOGICIEL_PRESTATAIRE_LP primary key (NUMERO_PRESTATAIRE, NUMERO_LOGICIEL)
 );
@@ -912,10 +912,10 @@ create index LOGICIEL_PRESTATAIRE2_FK on T_J_LOGICIEL_PRESTATAIRE_LPR (
 create table T_J_PRODUIT_ACTION_PAC 
 (
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
    REFERENCE_PRODUIT    INTEGER              not null,
-   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, REFERENCE_PRODUIT)
+   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, REFERENCE_PRODUIT)
 );
 
 /*==============================================================*/
@@ -923,7 +923,7 @@ create table T_J_PRODUIT_ACTION_PAC
 /*==============================================================*/
 create index COMPREND_FK on T_J_PRODUIT_ACTION_PAC (
    NUMERO_SECTEUR_ACTIVITE ASC,
-   CODE_FOURNISSEUR ASC,
+   NUMERO_FOURNISSEUR ASC,
    NUMERO_ACTION_PUBLICITAIRE ASC
 );
 
@@ -941,9 +941,9 @@ create table T_J_SEMAINE_ACTION_SAC
 (
    NUMERO_SEMAINE       INTEGER              not null,
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   CODE_FOURNISSEUR     INTEGER              not null,
+   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
-   constraint PK_T_J_SEMAINE_ACTION_SAC primary key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_SEMAINE, NUMERO_ACTION_PUBLICITAIRE)
+   constraint PK_T_J_SEMAINE_ACTION_SAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_SEMAINE, NUMERO_ACTION_PUBLICITAIRE)
 );
 
 /*==============================================================*/
@@ -958,7 +958,7 @@ create index SEMAINE_ACTION_FK on T_J_SEMAINE_ACTION_SAC (
 /*==============================================================*/
 create index SEMAINE_ACTION2_FK on T_J_SEMAINE_ACTION_SAC (
    NUMERO_SECTEUR_ACTIVITE ASC,
-   CODE_FOURNISSEUR ASC,
+   NUMERO_FOURNISSEUR ASC,
    NUMERO_ACTION_PUBLICITAIRE ASC
 );
 
@@ -991,7 +991,7 @@ create index SEMAINE_THEMATIQUE2_FK on T_J_SEMAINE_THEMATIQUE_SET (
 /*==============================================================*/
 create table T_J_SPECIALITE_PRESTATAIRE_SPP 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_SPECIALITE    INTEGER              not null,
    constraint PK_T_J_SPECIALITE_PRESTATAIRE_ primary key (NUMERO_PRESTATAIRE, NUMERO_SPECIALITE)
 );
@@ -1015,7 +1015,7 @@ create index SPECIALITE_PRESTATAIRE2_FK on T_J_SPECIALITE_PRESTATAIRE_SPP (
 /*==============================================================*/
 create table T_J_SYSTEME_PRESTATAIRE_SPR 
 (
-   NUMERO_PRESTATAIRE   VARCHAR2(10)         not null,
+   NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_SYSTEME       INTEGER              not null,
    constraint PK_T_J_SYSTEME_PRESTATAIRE_SPR primary key (NUMERO_PRESTATAIRE, NUMERO_SYSTEME)
 );
@@ -1039,9 +1039,9 @@ create index SYSTEME_PRESTATAIRE2_FK on T_J_SYSTEME_PRESTATAIRE_SPR (
 /*==============================================================*/
 create table T_R_ETAT_ETA 
 (
-   CODE_ETAT            INTEGER              not null,
+   NUMERO_ETAT          INTEGER              not null,
    LIBELLE_ETAT         VARCHAR2(256),
-   constraint PK_T_R_ETAT_ETA primary key (CODE_ETAT)
+   constraint PK_T_R_ETAT_ETA primary key (NUMERO_ETAT)
 );
 
 /*==============================================================*/
@@ -1059,10 +1059,10 @@ create table T_R_LOGICIEL_LOG
 /*==============================================================*/
 create table T_R_POSTE_POS 
 (
-   CODE_POSTE           INTEGER              not null,
+   NUMERO_POSTE         INTEGER              not null,
    LIBELLE_POSTE        VARCHAR2(256),
    DESCRIPTION_POSTE    VARCHAR2(256),
-   constraint PK_T_R_POSTE_POS primary key (CODE_POSTE)
+   constraint PK_T_R_POSTE_POS primary key (NUMERO_POSTE)
 );
 
 /*==============================================================*/
@@ -1120,8 +1120,8 @@ alter table T_E_ACTION_PUBLICITAIRE_ACT
       references T_E_SECTEUR_ACTIVITE_SEC (NUMERO_SECTEUR_ACTIVITE);
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
-   add constraint FK_T_E_ACTI_DEMANDE_T_E_FOUR foreign key (CODE_FOURNISSEUR)
-      references T_E_FOURNISSEUR_FOU (CODE_FOURNISSEUR);
+   add constraint FK_T_E_ACTI_DEMANDE_T_E_FOUR foreign key (NUMERO_FOURNISSEUR)
+      references T_E_FOURNISSEUR_FOU (NUMERO_FOURNISSEUR);
 
 alter table T_E_ACTION_PUBLICITAIRE_ACT
    add constraint FK_T_E_ACTI_EST_PENDA_T_E_THEM foreign key (NUMERO_THEMATIQUE)
@@ -1132,28 +1132,28 @@ alter table T_E_ACTION_PUBLICITAIRE_ACT
       references T_E_GAMME_GAM (NUMERO_GAMME);
 
 alter table T_E_CONTACT_CON
-   add constraint FK_T_E_CONT_EST_POUR_T_R_POST foreign key (CODE_POSTE)
-      references T_R_POSTE_POS (CODE_POSTE);
+   add constraint FK_T_E_CONT_EST_POUR_T_R_POST foreign key (NUMERO_POSTE)
+      references T_R_POSTE_POS (NUMERO_POSTE);
 
 alter table T_E_CONTACT_CON
    add constraint FK_T_E_CONT_TRAVAILLE_T_E_GROU foreign key (NUMERO_GROUPE)
       references T_E_GROUPE_GRO (NUMERO_GROUPE);
 
 alter table T_E_FOURNISSEUR_FOU
-   add constraint FK_T_E_FOUR_DISPOSE_T_E_ENSE foreign key (CODE_ENSEIGNE)
-      references T_E_ENSEIGNE_ENS (CODE_ENSEIGNE);
+   add constraint FK_T_E_FOUR_DISPOSE_T_E_ENSE foreign key (NUMERO_ENSEIGNE)
+      references T_E_ENSEIGNE_ENS (NUMERO_ENSEIGNE);
 
 alter table T_E_FOURNISSEUR_FOU
-   add constraint FK_T_E_FOUR_INSTALLE_T_E_ADRE foreign key (CODE_ADRESSE)
-      references T_E_ADRESSE_ADR (CODE_ADRESSE);
+   add constraint FK_T_E_FOUR_INSTALLE_T_E_ADRE foreign key (NUMERO_ADRESSE)
+      references T_E_ADRESSE_ADR (NUMERO_ADRESSE);
 
 alter table T_E_FOURNISSEUR_FOU
    add constraint FK_T_E_FOUR_LIE_T_E_GROU foreign key (NUMERO_GROUPE)
       references T_E_GROUPE_GRO (NUMERO_GROUPE);
 
 alter table T_E_ORDRE_PUBLICITAIRE_ORD
-   add constraint FK_T_E_ORDR_COMPOSE_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
-      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
+   add constraint FK_T_E_ORDR_COMPOSE_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
 
 alter table T_E_ORDRE_PUBLICITAIRE_ORD
    add constraint FK_T_E_ORDR_REALISE_T_E_PRES foreign key (NUMERO_PRESTATAIRE)
@@ -1176,8 +1176,8 @@ alter table T_E_PRESTATAIRE_AUDIO_AUD
       references T_R_TYPE_MACHINE_TYM (NUMERO_TYPE_MACHINE);
 
 alter table T_E_PRESTATAIRE_EXTERNE_EXT
-   add constraint FK_T_E_PRES_DOMICILE_T_E_ADRE foreign key (CODE_ADRESSE)
-      references T_E_ADRESSE_ADR (CODE_ADRESSE);
+   add constraint FK_T_E_PRES_DOMICILE_T_E_ADRE foreign key (NUMERO_ADRESSE)
+      references T_E_ADRESSE_ADR (NUMERO_ADRESSE);
 
 alter table T_E_PRESTATAIRE_EXTERNE_EXT
    add constraint FK_PRESTATA_HERITAGE__PRESTAT3 foreign key (NUMERO_PRESTATAIRE)
@@ -1204,12 +1204,12 @@ alter table T_E_PRODUIT_PRO
       references T_E_GAMME_GAM (NUMERO_GAMME);
 
 alter table T_E_PRODUIT_PRO
-   add constraint FK_T_E_PROD_VEND_T_E_ENSE foreign key (CODE_ENSEIGNE)
-      references T_E_ENSEIGNE_ENS (CODE_ENSEIGNE);
+   add constraint FK_T_E_PROD_VEND_T_E_ENSE foreign key (NUMERO_ENSEIGNE)
+      references T_E_ENSEIGNE_ENS (NUMERO_ENSEIGNE);
 
 alter table T_J_BUDGET_BUD
-   add constraint FK_T_J_BUDG_BUDGET_T_E_FOUR foreign key (CODE_FOURNISSEUR)
-      references T_E_FOURNISSEUR_FOU (CODE_FOURNISSEUR);
+   add constraint FK_T_J_BUDG_BUDGET_T_E_FOUR foreign key (NUMERO_FOURNISSEUR)
+      references T_E_FOURNISSEUR_FOU (NUMERO_FOURNISSEUR);
 
 alter table T_J_BUDGET_BUD
    add constraint FK_T_J_BUDG_BUDGET2_T_E_ANNE foreign key (NUMERO_ANNEE)
@@ -1236,8 +1236,8 @@ alter table T_J_DETAIL_ACTION_DAC
       references T_R_TYPE_ACTION_TAC (NUMERO_TYPE_ACTION);
 
 alter table T_J_DETAIL_ACTION_DAC
-   add constraint FK_T_J_DETA_DETAIL_AC_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
-      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
+   add constraint FK_T_J_DETA_DETAIL_AC_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
 
 alter table T_J_DETAIL_THEMATIQUE_DET
    add constraint FK_T_J_DETA_DETAIL_TH_T_E_THEM foreign key (NUMERO_THEMATIQUE)
@@ -1248,16 +1248,16 @@ alter table T_J_DETAIL_THEMATIQUE_DET
       references T_R_TYPE_ACTION_TAC (NUMERO_TYPE_ACTION);
 
 alter table T_J_HISTORIQUE_ACTION_HAC
-   add constraint FK_T_J_HIST_HISTORIQU_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
-      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
+   add constraint FK_T_J_HIST_HISTORIQU_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
 
 alter table T_J_HISTORIQUE_ACTION_HAC
-   add constraint FK_HISTORIQ_HISTORIQU_ETAT2 foreign key (CODE_ETAT)
-      references T_R_ETAT_ETA (CODE_ETAT);
+   add constraint FK_HISTORIQ_HISTORIQU_ETAT2 foreign key (NUMERO_ETAT)
+      references T_R_ETAT_ETA (NUMERO_ETAT);
 
 alter table T_J_HISTORIQUE_ETAT_HET
-   add constraint FK_T_J_HIST_HISTORIQU_T_R_ETAT foreign key (CODE_ETAT)
-      references T_R_ETAT_ETA (CODE_ETAT);
+   add constraint FK_T_J_HIST_HISTORIQU_T_R_ETAT foreign key (NUMERO_ETAT)
+      references T_R_ETAT_ETA (NUMERO_ETAT);
 
 alter table T_J_HISTORIQUE_ETAT_HET
    add constraint FK_T_J_HIST_HISTORIQU_T_E_ORDR foreign key (NUMERO_ORDRE)
@@ -1276,8 +1276,8 @@ alter table T_J_LOGICIEL_PRESTATAIRE_LPR
       references T_R_LOGICIEL_LOG (NUMERO_LOGICIEL);
 
 alter table T_J_PRODUIT_ACTION_PAC
-   add constraint FK_T_J_PROD_COMPREND_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
-      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
+   add constraint FK_T_J_PROD_COMPREND_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
 
 alter table T_J_PRODUIT_ACTION_PAC
    add constraint FK_T_J_PROD_COMPREND2_T_E_PROD foreign key (REFERENCE_PRODUIT)
@@ -1288,8 +1288,8 @@ alter table T_J_SEMAINE_ACTION_SAC
       references T_E_SEMAINE_SEM (NUMERO_SEMAINE);
 
 alter table T_J_SEMAINE_ACTION_SAC
-   add constraint FK_T_J_SEMA_SEMAINE_A_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
-      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, CODE_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
+   add constraint FK_T_J_SEMA_SEMAINE_A_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
+      references T_E_ACTION_PUBLICITAIRE_ACT (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE);
 
 alter table T_J_SEMAINE_THEMATIQUE_SET
    add constraint FK_T_J_SEMA_SEMAINE_T_T_E_THEM foreign key (NUMERO_THEMATIQUE)
@@ -1328,6 +1328,9 @@ alter table T_E_GROUPE_GRO
     add constraint UQ_T_E_FOURNISSEUR_FOU_NOM_GROUPE unique (NOM_GROUPE);
 
 alter table T_R_SECTEUR_ACTIVITE_SEC
+    drop constraint UQ_T_R_SECTEUR_ACTIVITE_SEC_LIBELLE_SECTEUR_ACTIVITE;
+
+alter table T_R_SECTEUR_ACTIVITE_SEC
     add constraint UQ_T_R_SECTEUR_ACTIVITE_SEC_LIBELLE_SECTEUR_ACTIVITE unique (LIBELLE_SECTEUR_ACTIVITE);
     
 alter table T_R_TYPE_ACTION_TAC
@@ -1357,13 +1360,10 @@ alter table T_R_TYPE_MACHINE_TYM
 alter table T_R_QUALITE_TECHNIQUE_QUA
     add constraint UQ_T_R_QUALITE_TECHNIQUE_QUA_LIBELLE_QUALITE_TECHNIQUE unique (LIBELLE_QUALITE_TECHNIQUE);
 
-
 CREATE INDEX IDX_T_E_PRESTATAIRE_EXTERNE_EXT_RAISON_SOCIALE ON T_E_PRESTATAIRE_EXTERNE_EXT (RAISON_SOCIALE_PRESTA_EXTERNE);
 
+drop sequence NUMERO_ACTION_PUBLICITAIRE;
+CREATE SEQUENCE NUMERO_ACTION_PUBLICITAIRE START WITH 1 INCREMENT BY 1;
 
-alter table T_E_ACTION_PUBLICITAIRE_ACT
-   CREATE SEQUENCE NUMERO_ACTION_PUBLICITAIRE START WITH 1 INCREMENT BY 1
-
-alter table T_E_ORDRE_PUBLICITAIRE_ORD
-   CREATE SEQUENCE NUMERO_ORDRE START WITH 1 INCREMENT BY 1
-
+drop sequence NUMERO_ORDRE;
+CREATE SEQUENCE NUMERO_ORDRE START WITH 1 INCREMENT BY 1;
