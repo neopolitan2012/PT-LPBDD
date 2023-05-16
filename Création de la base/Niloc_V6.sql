@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 09:49:17                      */
+/* Date de création :  16/05/2023 10:56:52                      */
 /*==============================================================*/
 
 
@@ -559,7 +559,6 @@ create index REALISE_FK on T_E_ORDRE_PUBLICITAIRE_ORD (
 create table T_E_PRESATAIRE_TECHNIQUE_TEC 
 (
    NUMERO_PRESTATAIRE   INTEGER              not null,
-   NUMERO_ADRESSE       INTEGER,
    constraint PK_T_E_PRESATAIRE_TECHNIQUE_TE primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -571,7 +570,6 @@ create table T_E_PRESTATAIRE_AUDIO_AUD
    NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
    NUMERO_QUALITE_TECHNIQUE INTEGER              not null,
-   CODE_ADRESSE         INTEGER,
    constraint PK_T_E_PRESTATAIRE_AUDIO_AUD primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -612,7 +610,6 @@ create index DOMICILE_FK on T_E_PRESTATAIRE_EXTERNE_EXT (
 create table T_E_PRESTATAIRE_IMAGE_IMA 
 (
    NUMERO_PRESTATAIRE   INTEGER              not null,
-   NUMERO_ADRESSE       INTEGER,
    constraint PK_T_E_PRESTATAIRE_IMAGE_IMA primary key (NUMERO_PRESTATAIRE)
 );
 
@@ -632,7 +629,6 @@ create table T_E_PRESTATAIRE_PAPIER_PAP
 (
    NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
-   NUMERO_ADRESSE       INTEGER,
    RECYCLAGE            CHAR(3),
    constraint PK_T_E_PRESTATAIRE_PAPIER_PAP primary key (NUMERO_PRESTATAIRE)
 );
