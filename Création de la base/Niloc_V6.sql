@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 09:38:40                      */
+/* Date de création :  16/05/2023 09:49:17                      */
 /*==============================================================*/
 
 
@@ -570,7 +570,7 @@ create table T_E_PRESTATAIRE_AUDIO_AUD
 (
    NUMERO_PRESTATAIRE   INTEGER              not null,
    NUMERO_TYPE_MACHINE  INTEGER              not null,
-   CODE_QUALITE_TECHNIQUE INTEGER              not null,
+   NUMERO_QUALITE_TECHNIQUE INTEGER              not null,
    CODE_ADRESSE         INTEGER,
    constraint PK_T_E_PRESTATAIRE_AUDIO_AUD primary key (NUMERO_PRESTATAIRE)
 );
@@ -586,7 +586,7 @@ create index SERT_FK on T_E_PRESTATAIRE_AUDIO_AUD (
 /* Index : EST_AGREE_FK                                         */
 /*==============================================================*/
 create index EST_AGREE_FK on T_E_PRESTATAIRE_AUDIO_AUD (
-   CODE_QUALITE_TECHNIQUE ASC
+   NUMERO_QUALITE_TECHNIQUE ASC
 );
 
 /*==============================================================*/
@@ -1223,7 +1223,7 @@ alter table T_E_PRESTATAIRE_AUDIO_AUD
       references T_E_PRESTATAIRE_EXTERNE_EXT (NUMERO_PRESTATAIRE);
 
 alter table T_E_PRESTATAIRE_AUDIO_AUD
-   add constraint FK_T_E_PRES_EST_AGREE_T_R_QUAL foreign key (CODE_QUALITE_TECHNIQUE)
+   add constraint FK_T_E_PRES_EST_AGREE_T_R_QUAL foreign key (NUMERO_QUALITE_TECHNIQUE)
       references T_R_QUALITE_TECHNIQUE_QUA (NUMERO_QUALITE_TECHNIQUE);
 
 alter table T_E_PRESTATAIRE_AUDIO_AUD
