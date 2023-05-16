@@ -1,4 +1,4 @@
-------- Insertion des données des tables : secteur d'activité, etat, action publicitaire, ordre publicitaire, objet publicitaire, semaine, semaine_thematique, composition_ordre
+------- Insertion des données des tables : secteur d'activité, etat, action publicitaire, ordre publicitaire, objet publicitaire, semaine, semaine_thematique, composition_ordre, couple, type action, détail action, détail thématique, type, action, détail action, détail thématique, semaine action, 
 -- données secteur d'activite
 INSERT INTO T_R_SECTEUR_ACTIVITE_SEC values (1,'agroalimentaire');
 INSERT INTO T_R_SECTEUR_ACTIVITE_SEC values (2,'papeterie');
@@ -776,3 +776,54 @@ INSERT INTO T_J_SEMAINE_THEMATIQUE values(9,144);
 INSERT INTO T_J_SEMAINE_THEMATIQUE values(6,56);
 INSERT INTO T_J_SEMAINE_THEMATIQUE values(14,38);
 INSERT INTO T_J_SEMAINE_THEMATIQUE values(9,113);
+-- données couple 
+INSERT INTO T_J_COUPLE_COU values ('1', 'Radio 30s');
+INSERT INTO T_J_COUPLE_COU values ('2', 'Radio 30s');
+INSERT INTO T_J_COUPLE_COU values ('5', 'Presse écrite 1/2 page');
+INSERT INTO T_J_COUPLE_COU values ('6', 'Presse écrite pleine page');
+INSERT INTO T_J_COUPLE_COU values ('8', 'Internet pavé');
+INSERT INTO T_J_COUPLE_COU values ('10', 'Cinéma 30s');
+-- données type action 
+insert into T_E_TYPE_ACTION_TAC values ('1', 'Radio 30s');
+insert into T_E_TYPE_ACTION_TAC values ('2', 'Radio 30s');
+insert into T_E_TYPE_ACTION_TAC values ('3', 'Télévision 15s');
+insert into T_E_TYPE_ACTION_TAC values ('4', 'Télévision 30s');
+insert into T_E_TYPE_ACTION_TAC values ('5', 'Presse écrite 1/2 page');
+insert into T_E_TYPE_ACTION_TAC values ('6', 'Presse écrite pleine page');
+insert into T_E_TYPE_ACTION_TAC values ('7', 'Internet bannière');
+insert into T_E_TYPE_ACTION_TAC values ('8', 'Internet pavé');
+insert into T_E_TYPE_ACTION_TAC values ('9', 'Cinéma 15s');
+insert into T_E_TYPE_ACTION_TAC values ('10', 'Cinéma 30s');
+-- données détail action
+insert into T_J_DETAIL_ACTION_DAC values ('1', '1', '40', '1', 30450, 34000);
+insert into T_J_DETAIL_ACTION_DAC values ('2', '2', '40', '1', 18000, 10000);
+insert into T_J_DETAIL_ACTION_DAC values ('3', '3', '30', '2', 25000, 20000);
+insert into T_J_DETAIL_ACTION_DAC values ('4', '4', '30', '2', 18000, 15000);
+insert into T_J_DETAIL_ACTION_DAC values ('5', '5', '15', '3', 12000, 10000);
+insert into T_J_DETAIL_ACTION_DAC values ('6', '6', '15', '3', 8000, 5000);
+insert into T_J_DETAIL_ACTION_DAC values ('7', '7', '20', '4', 20000, 18000);
+insert into T_J_DETAIL_ACTION_DAC values ('8', '8', '20', '4', 15000, 12000);
+insert into T_J_DETAIL_ACTION_DAC values ('9', '9', '10', '5', 10000, 8000);
+insert into T_J_DETAIL_ACTION_DAC values ('10', '10', '10', '5', 7000, 5000);
+-- données détail thématique 
+insert into T_J_DETAIL_THEMATIQUE_DET values ('1', '1');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('2', '2');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('3', '3');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('4', '4');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('5', '5');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('6', '6');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('7', '7');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('8', '8');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('9', '9');
+insert into T_J_DETAIL_THEMATIQUE_DET values ('10', '10');
+-- données semaine action 
+insert into T_J_SEMAINE_ACTION_SAC values ('12', '1', '1', '1');
+insert into T_J_SEMAINE_ACTION_SAC values ('14', '2', '1', '1');
+insert into T_J_SEMAINE_ACTION_SAC values ('16', '3', '2', '3');
+insert into T_J_SEMAINE_ACTION_SAC values ('18', '4', '3', '5');
+insert into T_J_SEMAINE_ACTION_SAC values ('20', '5', '3', '6');
+insert into T_J_SEMAINE_ACTION_SAC values ('22', '6', '4', '8');
+insert into T_J_SEMAINE_ACTION_SAC values ('24', '7', '4', '9');
+insert into T_J_SEMAINE_ACTION_SAC values ('26', '8', '5', '11');
+insert into T_J_SEMAINE_ACTION_SAC values ('28', '9', '5', '12');
+insert into T_J_SEMAINE_ACTION_SAC values ('30', '10', '6', '14');
