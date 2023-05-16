@@ -1,11 +1,11 @@
-create or replace view action_pub as
-select numero_action_publicitaire, libelle_secteur_activite, nom_fournisseur, libelle_thematique, libelle_gamme, prix_revient_detail_action, prix_vente_detail_action, nom_produit
-from t_e_action_publicitaire_act act
-join t_j_detail_action_dac dac on dac.numero_secteur_activite = act.numero_secteur_activite
-join t_e_secteur_activite_sec sec on sec.numero_secteur_activite = act.numero_secteur_activite
-join t_e_gamme_gam gam on gam.numero_gamme = act.numero_gamme
-join t_e_thematique_the the on the.numero_thematique = act.numero_thematique
-join t_j_produit_action_pac pac on pac.numero_secteur_activite = act.numero_secteur_activite
-join t_e_produit_pro pro on pro.numero_produit = pac.numero_produit
-join t_e_fournisseur_fou fou on fou.numero_fournisseur = act.numero_fournisseur
+CREATE OR REPLACE VIEW ACTIon_PUB as
+SELECT NUMERO_ACTIon_PUBLICITAIRE, LIBELLE_SECTEUR_ACTIVITE, NOM_FOURNISSEUR, LIBELLE_THEMATIQUE, LIBELLE_GAMME, PRIX_REVIENT_DETAIL_ACTIon, PRIX_VENTE_DETAIL_ACTIon, NOM_PRODUIT
+FROM T_E_ACTIon_PUBLICITAIRE_ACT ACT
+	JOIN T_J_DETAIL_ACTIon_DAC DAC on DAC.NUMERO_SECTEUR_ACTIVITE = ACT.NUMERO_SECTEUR_ACTIVITE
+	JOIN T_E_SECTEUR_ACTIVITE_SEC SEC on SEC.NUMERO_SECTEUR_ACTIVITE = ACT.NUMERO_SECTEUR_ACTIVITE
+	JOIN T_E_GAMME_GAM GAM on GAM.NUMERO_GAMME = ACT.NUMERO_GAMME
+	JOIN T_E_THEMATIQUE_THE THE on THE.NUMERO_THEMATIQUE = ACT.NUMERO_THEMATIQUE
+	JOIN T_J_PRODUIT_ACTIon_PAC PAC on PAC.NUMERO_SECTEUR_ACTIVITE = ACT.NUMERO_SECTEUR_ACTIVITE
+	JOIN T_E_PRODUIT_PRO PRO on PRO.NUMERO_PRODUIT = PAC.NUMERO_PRODUIT
+	JOIN T_E_FOURNISSEUR_FOU FOU on FOU.NUMERO_FOURNISSEUR = ACT.NUMERO_FOURNISSEUR
 
