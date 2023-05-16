@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 13:52:01                      */
+/* Date de création :  16/05/2023 13:58:49                      */
 /*==============================================================*/
 
 
@@ -124,16 +124,16 @@ alter table T_J_LOGICIEL_PRESTATAIRE_LPR
 alter table T_J_LOGICIEL_PRESTATAIRE_LPR
    drop constraint FK_T_J_LOGI_LOGICIEL__T_R_LOGI;
 
-alter table T_J_PRESTATAIRE_INTERNE_LOGICI
+alter table T_J_PRESTA_INT_LOG_PIL
    drop constraint FK_T_J_PRES_FK_PRESTA_T_E_PRES;
 
-alter table T_J_PRESTATAIRE_INTERNE_LOGICI
+alter table T_J_PRESTA_INT_LOG_PIL
    drop constraint FK_T_J_PRES_REFERENCE_T_R_LOGI;
 
-alter table T_J_PRESTATAIRE_INTERNE_SYSTEM
+alter table T_J_PRESTA_INT_SYS_PIS
    drop constraint FK_T_J_PRES_FK_PRESTA_T_J_SYST;
 
-alter table T_J_PRESTATAIRE_INTERNE_SYSTEM
+alter table T_J_PRESTA_INT_SYS_PIS
    drop constraint FK_T_J_PRES_FK_PRESTA_T_E_PRE2;
 
 alter table T_J_PRODUIT_ACTION_PAC
@@ -292,9 +292,9 @@ drop index LOGICIEL_PRESTATAIRE_FK;
 
 drop table T_J_LOGICIEL_PRESTATAIRE_LPR cascade constraints;
 
-drop table T_J_PRESTATAIRE_INTERNE_LOGICI cascade constraints;
+drop table T_J_PRESTA_INT_LOG_PIL cascade constraints;
 
-drop table T_J_PRESTATAIRE_INTERNE_SYSTEM cascade constraints;
+drop table T_J_PRESTA_INT_SYS_PIS cascade constraints;
 
 drop index COMPREND2_FK;
 
@@ -931,23 +931,23 @@ create index LOGICIEL_PRESTATAIRE2_FK on T_J_LOGICIEL_PRESTATAIRE_LPR (
 );
 
 /*==============================================================*/
-/* Table : T_J_PRESTATAIRE_INTERNE_LOGICI                       */
+/* Table : T_J_PRESTA_INT_LOG_PIL                               */
 /*==============================================================*/
-create table T_J_PRESTATAIRE_INTERNE_LOGICI 
+create table T_J_PRESTA_INT_LOG_PIL 
 (
    NUMERO_LOGICIEL      INTEGER              not null,
    NUMERO_PRESTATAIRE   INTEGER              not null,
-   constraint PK_T_J_PRESTATAIRE_INTERNE_LOG primary key (NUMERO_LOGICIEL, NUMERO_PRESTATAIRE)
+   constraint PK_T_J_PRESTA_INT_LOG_PIL primary key (NUMERO_LOGICIEL, NUMERO_PRESTATAIRE)
 );
 
 /*==============================================================*/
-/* Table : T_J_PRESTATAIRE_INTERNE_SYSTEM                       */
+/* Table : T_J_PRESTA_INT_SYS_PIS                               */
 /*==============================================================*/
-create table T_J_PRESTATAIRE_INTERNE_SYSTEM 
+create table T_J_PRESTA_INT_SYS_PIS 
 (
    NUMERO_SYSTEME       INTEGER              not null,
    NUMERO_PRESTATAIRE   INTEGER              not null,
-   constraint PK_T_J_PRESTATAIRE_INTERNE_SYS primary key (NUMERO_SYSTEME, NUMERO_PRESTATAIRE)
+   constraint PK_T_J_PRESTA_INT_SYS_PIS primary key (NUMERO_SYSTEME, NUMERO_PRESTATAIRE)
 );
 
 /*==============================================================*/
@@ -1326,19 +1326,19 @@ alter table T_J_LOGICIEL_PRESTATAIRE_LPR
    add constraint FK_T_J_LOGI_LOGICIEL__T_R_LOGI foreign key (NUMERO_LOGICIEL)
       references T_R_LOGICIEL_LOG (NUMERO_LOGICIEL);
 
-alter table T_J_PRESTATAIRE_INTERNE_LOGICI
+alter table T_J_PRESTA_INT_LOG_PIL
    add constraint FK_T_J_PRES_FK_PRESTA_T_E_PRES foreign key (NUMERO_PRESTATAIRE)
       references T_E_PRESTATAIRE_INTERNE_INT (NUMERO_PRESTATAIRE);
 
-alter table T_J_PRESTATAIRE_INTERNE_LOGICI
+alter table T_J_PRESTA_INT_LOG_PIL
    add constraint FK_T_J_PRES_REFERENCE_T_R_LOGI foreign key (NUMERO_LOGICIEL)
       references T_R_LOGICIEL_LOG (NUMERO_LOGICIEL);
 
-alter table T_J_PRESTATAIRE_INTERNE_SYSTEM
+alter table T_J_PRESTA_INT_SYS_PIS
    add constraint FK_T_J_PRES_FK_PRESTA_T_J_SYST foreign key (NUMERO_PRESTATAIRE, NUMERO_SYSTEME)
       references T_J_SYSTEME_PRESTATAIRE_SPR (NUMERO_PRESTATAIRE, NUMERO_SYSTEME);
 
-alter table T_J_PRESTATAIRE_INTERNE_SYSTEM
+alter table T_J_PRESTA_INT_SYS_PIS
    add constraint FK_T_J_PRES_FK_PRESTA_T_E_PRE2 foreign key (NUMERO_PRESTATAIRE)
       references T_E_PRESTATAIRE_INTERNE_INT (NUMERO_PRESTATAIRE);
 
