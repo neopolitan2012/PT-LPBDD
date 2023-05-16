@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 15:21:53                      */
+/* Date de création :  16/05/2023 16:52:03                      */
 /*==============================================================*/
 
 
@@ -37,9 +37,6 @@ alter table T_E_ORDRE_PUBLICITAIRE_ORD
 alter table T_E_ORDRE_PUBLICITAIRE_ORD
    drop constraint FK_T_E_ORDR_REALISE_T_E_PRES;
 
-alter table T_E_PRESATAIRE_TECHNIQUE_TEC
-   drop constraint FK_PRESTATA_HERITAGE__PRESTAT6;
-
 alter table T_E_PRESTATAIRE_AUDIO_AUD
    drop constraint FK_PRESTATA_HERITAGE__PRESTAT4;
 
@@ -66,6 +63,9 @@ alter table T_E_PRESTATAIRE_PAPIER_PAP
 
 alter table T_E_PRESTATAIRE_PAPIER_PAP
    drop constraint FK_T_E_PRES_EMPLOYE_T_R_TYPE;
+
+alter table T_E_PRESTATAIRE_TECHNIQUE_TEC
+   drop constraint FK_PRESTATA_HERITAGE__PRESTAT6;
 
 alter table T_E_PRODUIT_PRO
    drop constraint FK_T_E_PROD_EST_COMPO_T_E_GAMM;
@@ -208,8 +208,6 @@ drop index COMPOSE_FK;
 
 drop table T_E_ORDRE_PUBLICITAIRE_ORD cascade constraints;
 
-drop table T_E_PRESATAIRE_TECHNIQUE_TEC cascade constraints;
-
 drop index EST_AGREE_FK;
 
 drop index SERT_FK;
@@ -229,6 +227,8 @@ drop index EMPLOYE_FK;
 drop table T_E_PRESTATAIRE_PAPIER_PAP cascade constraints;
 
 drop table T_E_PRESTATAIRE_PRE cascade constraints;
+
+drop table T_E_PRESTATAIRE_TECHNIQUE_TEC cascade constraints;
 
 drop index VEND_FK;
 
@@ -550,15 +550,6 @@ create index REALISE_FK on T_E_ORDRE_PUBLICITAIRE_ORD (
 );
 
 /*==============================================================*/
-/* Table : T_E_PRESATAIRE_TECHNIQUE_TEC                         */
-/*==============================================================*/
-create table T_E_PRESATAIRE_TECHNIQUE_TEC 
-(
-   NUMERO_PRESTATAIRE   INTEGER              not null,
-   constraint PK_T_E_PRESATAIRE_TECHNIQUE_TE primary key (NUMERO_PRESTATAIRE)
-);
-
-/*==============================================================*/
 /* Table : T_E_PRESTATAIRE_AUDIO_AUD                            */
 /*==============================================================*/
 create table T_E_PRESTATAIRE_AUDIO_AUD 
@@ -645,6 +636,15 @@ create table T_E_PRESTATAIRE_PRE
    NOM_PRESTATAIRE      VARCHAR2(256)        not null,
    RAISON_SOCIALE       VARCHAR2(100)        not null,
    constraint PK_T_E_PRESTATAIRE_PRE primary key (NUMERO_PRESTATAIRE)
+);
+
+/*==============================================================*/
+/* Table : T_E_PRESTATAIRE_TECHNIQUE_TEC                        */
+/*==============================================================*/
+create table T_E_PRESTATAIRE_TECHNIQUE_TEC 
+(
+   NUMERO_PRESTATAIRE   INTEGER              not null,
+   constraint PK_T_E_PRESATAIRE_TECHNIQUE_TE primary key (NUMERO_PRESTATAIRE)
 );
 
 /*==============================================================*/
@@ -1198,10 +1198,6 @@ alter table T_E_ORDRE_PUBLICITAIRE_ORD
    add constraint FK_T_E_ORDR_REALISE_T_E_PRES foreign key (NUMERO_PRESTATAIRE)
       references T_E_PRESTATAIRE_PRE (NUMERO_PRESTATAIRE);
 
-alter table T_E_PRESATAIRE_TECHNIQUE_TEC
-   add constraint FK_PRESTATA_HERITAGE__PRESTAT6 foreign key (NUMERO_PRESTATAIRE)
-      references T_E_PRESTATAIRE_EXTERNE_EXT (NUMERO_PRESTATAIRE);
-
 alter table T_E_PRESTATAIRE_AUDIO_AUD
    add constraint FK_PRESTATA_HERITAGE__PRESTAT4 foreign key (NUMERO_PRESTATAIRE)
       references T_E_PRESTATAIRE_EXTERNE_EXT (NUMERO_PRESTATAIRE);
@@ -1237,6 +1233,10 @@ alter table T_E_PRESTATAIRE_PAPIER_PAP
 alter table T_E_PRESTATAIRE_PAPIER_PAP
    add constraint FK_T_E_PRES_EMPLOYE_T_R_TYPE foreign key (NUMERO_TYPE_MACHINE)
       references T_R_TYPE_MACHINE_TYM (NUMERO_TYPE_MACHINE);
+
+alter table T_E_PRESTATAIRE_TECHNIQUE_TEC
+   add constraint FK_PRESTATA_HERITAGE__PRESTAT6 foreign key (NUMERO_PRESTATAIRE)
+      references T_E_PRESTATAIRE_EXTERNE_EXT (NUMERO_PRESTATAIRE);
 
 alter table T_E_PRODUIT_PRO
    add constraint FK_T_E_PROD_EST_COMPO_T_E_GAMM foreign key (NUMERO_GAMME)
@@ -1356,7 +1356,7 @@ alter table T_J_SEMAINE_THEMATIQUE_SET
 
 alter table T_J_SPECIALITE_PRESTATAIRE_SPP
    add constraint FK_T_J_SPEC_SPECIALIT_T_E_PRES foreign key (NUMERO_PRESTATAIRE)
-      references T_E_PRESATAIRE_TECHNIQUE_TEC (NUMERO_PRESTATAIRE);
+      references T_E_PRESTATAIRE_TECHNIQUE_TEC (NUMERO_PRESTATAIRE);
 
 alter table T_J_SPECIALITE_PRESTATAIRE_SPP
    add constraint FK_T_J_SPEC_SPECIALIT_T_R_SPEC foreign key (NUMERO_SPECIALITE)
