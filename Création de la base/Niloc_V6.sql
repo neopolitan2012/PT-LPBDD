@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 09:24:09                      */
+/* Date de création :  16/05/2023 09:38:40                      */
 /*==============================================================*/
 
 
@@ -660,12 +660,12 @@ create table T_E_PRESTATAIRE_PRE
 /*==============================================================*/
 create table T_E_PRODUIT_PRO 
 (
-   REFERENCE_PRODUIT    INTEGER              not null,
+   NUMERO_PRODUIT       INTEGER              not null,
    NUMERO_ENSEIGNE      INTEGER              not null,
    NUMERO_GAMME         INTEGER              not null,
    NOM_PRODUIT          VARCHAR2(256),
    GEN_CODE             CHAR(10)             not null,
-   constraint PK_T_E_PRODUIT_PRO primary key (REFERENCE_PRODUIT),
+   constraint PK_T_E_PRODUIT_PRO primary key (NUMERO_PRODUIT),
    constraint UQ_T_E_PRODUIT_PRO_CODE_GEN unique (GEN_CODE)
 );
 
@@ -962,8 +962,8 @@ create table T_J_PRODUIT_ACTION_PAC
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
    NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
-   REFERENCE_PRODUIT    INTEGER              not null,
-   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, REFERENCE_PRODUIT)
+   NUMERO_PRODUIT       INTEGER              not null,
+   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, NUMERO_PRODUIT)
 );
 
 /*==============================================================*/
@@ -979,7 +979,7 @@ create index COMPREND_FK on T_J_PRODUIT_ACTION_PAC (
 /* Index : COMPREND2_FK                                         */
 /*==============================================================*/
 create index COMPREND2_FK on T_J_PRODUIT_ACTION_PAC (
-   REFERENCE_PRODUIT ASC
+   NUMERO_PRODUIT ASC
 );
 
 /*==============================================================*/
@@ -1347,8 +1347,8 @@ alter table T_J_PRESTATAIRE_INTERNE_LOGICI
       references T_R_LOGICIEL_LOG (NUMERO_LOGICIEL);
 
 alter table T_J_PRODUIT_ACTION_PAC
-   add constraint FK_T_J_PROD_COMPREND2_T_E_PROD foreign key (REFERENCE_PRODUIT)
-      references T_E_PRODUIT_PRO (REFERENCE_PRODUIT);
+   add constraint FK_T_J_PROD_COMPREND2_T_E_PROD foreign key (NUMERO_PRODUIT)
+      references T_E_PRODUIT_PRO (NUMERO_PRODUIT);
 
 alter table T_J_PRODUIT_ACTION_PAC
    add constraint FK_T_J_PROD_COMPREND_T_E_ACTI foreign key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE)
