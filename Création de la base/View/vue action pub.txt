@@ -1,0 +1,11 @@
+create or replace view action_pub as
+select numero_action_publicitaire, libelle_secteur_activite, nom_fournisseur, libelle_thematique, libelle_gamme, prix_revient_detail_action, prix_vente_detail_action, nom_produit
+from t_e_action_publicitaire_act act
+join t_j_detail_action_dac dac on dac.numero_secteur_activite = act.numero_secteur_activite
+join t_e_secteur_activite_sec sec on sec.numero_secteur_activite = act.numero_secteur_activite
+join t_e_gamme_gam gam on gam.numero_gamme = act.numero_gamme
+join t_e_thematique_the the on the.numero_thematique = act.numero_thematique
+join t_j_produit_action_pac pac on pac.numero_secteur_activite = act.numero_secteur_activite
+join t_e_produit_pro pro on pro.numero_produit = pac.numero_produit
+join t_e_fournisseur_fou fou on fou.numero_fournisseur = act.numero_fournisseur
+
