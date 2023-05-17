@@ -361,7 +361,7 @@ create table T_E_ACTION_PUBLICITAIRE_ACT
    NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
    NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_THEMATIQUE    INTEGER,
-   NUMERO_GAMME         INTEGER              not null,
+   NUMERO_GAMME         INTEGER,
    constraint PK_T_E_ACTION_PUBLICITAIRE_ACT primary key (NUMERO_ACTION_PUBLICITAIRE)
 );
 
