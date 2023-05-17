@@ -24,7 +24,7 @@ TRUNCATE TABLE T_E_FOURNISSEUR_FOU;
 TRUNCATE TABLE T_E_GROUPE_GRO; 
 TRUNCATE TABLE T_E_OBJET_PUBLICITAIRE_OBJ; 
 TRUNCATE TABLE T_E_ORDRE_PUBLICITAIRE_ORD; 
-TRUNCATE TABLE T_E_PRESATAIRE_TECHNIQUE_TEC; 
+TRUNCATE TABLE T_E_PRESTATAIRE_TECHNIQUE_TEC; 
 TRUNCATE TABLE T_E_PRESTATAIRE_AUDIO_AUD; 
 TRUNCATE TABLE T_E_PRESTATAIRE_IMAGE_IMA; 
 TRUNCATE TABLE T_E_PRESTATAIRE_INTERNE_INT; 
@@ -277,8 +277,8 @@ Insert into t_e_prestataire_image_ima(numero_prestataire) values(3);
 Insert into t_e_prestataire_image_ima(numero_prestataire) values(5);
 
 /* Prestataire Technique*/
-Insert into t_e_presataire_technique_tec(numero_prestataire) values(2);
-Insert into t_e_presataire_technique_tec(numero_prestataire) values(5);
+Insert into t_e_prestataire_technique_tec(numero_prestataire) values(2);
+Insert into t_e_prestataire_technique_tec(numero_prestataire) values(5);
 
 /* Logiciel prestataire */
 Insert into t_j_logiciel_prestataire_lpr(Numero_prestataire,Numero_Logiciel) values(3,2);
@@ -903,3 +903,5 @@ INSERT INTO T_E_ACTION_PUBLICITAIRE_ACT values(90,3,3,15,6);
 INSERT INTO T_E_ACTION_PUBLICITAIRE_ACT values(91,2,3,10,3);
 INSERT INTO T_E_ACTION_PUBLICITAIRE_ACT values(92,2,6,12,6);
 INSERT INTO T_E_ACTION_PUBLICITAIRE_ACT values(93,3,9,9,5);
+
+COMMIT;
