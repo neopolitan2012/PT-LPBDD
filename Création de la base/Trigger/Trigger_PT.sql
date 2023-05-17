@@ -18,7 +18,6 @@ CREATE OR REPLACE TRIGGER TRG_Prestataire_Interne
         'Ce prestataire est déjà considéré comme externe');
     End IF;
  END;
- commit;
  
  /* OK : A TESTER */
  
@@ -96,8 +95,8 @@ CREATE OR REPLACE TRIGGER TRG_Action_Produit_Action
     Where ap.numero_action_publicitaire = :new.Numero_Action_Publicitaire;
 
     Select count(*) into vCpt
-    From T_J_Semaine_Thematique_SET set
-    Where set.numero_semaine = :new.Numero_Semaine AND set.numero_thematique = vIdthematique;
+    From T_J_Semaine_Thematique_SET st
+    Where st.numero_semaine = :new.Numero_Semaine AND st.numero_thematique = vIdthematique;
     
     If vCpt = 0 And vIdthematique is not null then
         raise_application_error(-20005,'La thématique de l''action ne possède pas cette semaine');
