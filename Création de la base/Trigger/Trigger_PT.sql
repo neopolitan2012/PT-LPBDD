@@ -1,7 +1,7 @@
 
  /* Prestataire Externe/int */
 
-/* OK : A TESTER */
+/* OK : TESTÉ - OK */
 CREATE OR REPLACE TRIGGER TRG_Prestataire_Interne
  BEFORE INSERT OR UPDATE ON T_E_Prestataire_Interne_int
  FOR EACH ROW
@@ -9,7 +9,7 @@ CREATE OR REPLACE TRIGGER TRG_Prestataire_Interne
     vCpt integer := 0; 
  BEGIN
     Select count(*) into vCpt
-    From T_E_Prestataire_Interne_int
+    From T_E_Prestataire_Externe_ext
     Where Numero_Prestataire = :new.Numero_Prestataire;
     
     If vCpt >= 1 Then
@@ -19,7 +19,7 @@ CREATE OR REPLACE TRIGGER TRG_Prestataire_Interne
     End IF;
  END;
  
- /* OK : A TESTER */
+ /* OK : TESTÉ - OK */
  
  CREATE OR REPLACE TRIGGER TRG_Prestataire_Externe
  BEFORE INSERT OR UPDATE ON T_E_Prestataire_Externe_ext
