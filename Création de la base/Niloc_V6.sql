@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  16/05/2023 17:19:22                      */
+/* Date de création :  17/05/2023 10:54:51                      */
 /*==============================================================*/
 
 
@@ -131,10 +131,10 @@ alter table T_J_PRESTA_INT_LOG_PIL
    drop constraint FK_T_J_PRES_REFERENCE_T_R_LOGI;
 
 alter table T_J_PRESTA_INT_SYS_PIS
-   drop constraint FK_T_J_PRES_FK_PRESTA_T_J_SYST;
+   drop constraint FK_T_J_PRES_FK_PRESTA_T_E_PRE2;
 
 alter table T_J_PRESTA_INT_SYS_PIS
-   drop constraint FK_T_J_PRES_FK_PRESTA_T_E_PRE2;
+   drop constraint FK_T_J_PRES_REFERENCE_T_R_SYST;
 
 alter table T_J_PRODUIT_ACTION_PAC
    drop constraint FK_T_J_PROD_COMPREND2_T_E_PROD;
@@ -1323,12 +1323,12 @@ alter table T_J_PRESTA_INT_LOG_PIL
       references T_R_LOGICIEL_LOG (NUMERO_LOGICIEL);
 
 alter table T_J_PRESTA_INT_SYS_PIS
-   add constraint FK_T_J_PRES_FK_PRESTA_T_J_SYST foreign key (NUMERO_PRESTATAIRE, NUMERO_SYSTEME)
-      references T_J_SYSTEME_PRESTATAIRE_SPR (NUMERO_PRESTATAIRE, NUMERO_SYSTEME);
-
-alter table T_J_PRESTA_INT_SYS_PIS
    add constraint FK_T_J_PRES_FK_PRESTA_T_E_PRE2 foreign key (NUMERO_PRESTATAIRE)
       references T_E_PRESTATAIRE_INTERNE_INT (NUMERO_PRESTATAIRE);
+
+alter table T_J_PRESTA_INT_SYS_PIS
+   add constraint FK_T_J_PRES_REFERENCE_T_R_SYST foreign key (NUMERO_SYSTEME)
+      references T_R_SYSTEME_SYS (NUMERO_SYSTEME);
 
 alter table T_J_PRODUIT_ACTION_PAC
    add constraint FK_T_J_PROD_COMPREND2_T_E_PROD foreign key (NUMERO_PRODUIT)
