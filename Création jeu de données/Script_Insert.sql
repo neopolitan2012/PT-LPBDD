@@ -11,6 +11,11 @@ TRUNCATE TABLE T_J_SEMAINE_ACTION_SAC;
 TRUNCATE TABLE T_J_SEMAINE_THEMATIQUE_SET; 
 TRUNCATE TABLE T_J_SPECIALITE_PRESTATAIRE_SPP; 
 TRUNCATE TABLE T_J_SYSTEME_PRESTATAIRE_SPR;
+TRUNCATE TABLE T_J_PRESTA_INT_LOG_PIL;
+TRUNCATE TABLE T_J_PRESTA_INT_SYS_PIS;
+
+
+
 
 TRUNCATE TABLE T_E_ANNEE_ANE; 
 TRUNCATE TABLE T_E_CONTACT_CON; 
@@ -1838,5 +1843,24 @@ INSERT INTO T_J_PRODUIT_ACTION_PAC VALUES(4,3,76,20);
 INSERT INTO T_J_PRODUIT_ACTION_PAC VALUES(5,5,55,3);
 INSERT INTO T_J_PRODUIT_ACTION_PAC VALUES(3,1,48,4);
 INSERT INTO T_J_PRODUIT_ACTION_PAC VALUES(3,2,63,20);
+
+---Insère Presta int Logiciel
+
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,1);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,2);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,3);
+
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,2);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,4);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,5);
+
+---Insère Presta int Système
+
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(7,3);
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(7,2);
+
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(8,3);
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(8,1);
+
 
 COMMIT;

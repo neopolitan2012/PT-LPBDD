@@ -1,0 +1,13 @@
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,1);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,2);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (7,3);
+
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,2);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,4);
+Insert into t_j_presta_int_log_pil(numero_prestataire,numero_logiciel) values (8,5);
+
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(7,3);
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(7,2);
+
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(8,3);
+Insert into t_j_presta_int_sys_pis(numero_prestataire,numero_systeme) values(8,1);
