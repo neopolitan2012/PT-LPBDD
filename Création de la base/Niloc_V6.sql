@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  ORACLE Version 11g                            */
-/* Date de création :  17/05/2023 10:54:51                      */
+/* Date de création :  17/05/2023 11:55:06                      */
 /*==============================================================*/
 
 
@@ -937,11 +937,9 @@ create table T_J_PRESTA_INT_SYS_PIS
 /*==============================================================*/
 create table T_J_PRODUIT_ACTION_PAC 
 (
-   NUMERO_SECTEUR_ACTIVITE INTEGER              not null,
-   NUMERO_FOURNISSEUR   INTEGER              not null,
    NUMERO_ACTION_PUBLICITAIRE INTEGER              not null,
    NUMERO_PRODUIT       INTEGER              not null,
-   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_SECTEUR_ACTIVITE, NUMERO_FOURNISSEUR, NUMERO_ACTION_PUBLICITAIRE, NUMERO_PRODUIT)
+   constraint PK_T_J_PRODUIT_ACTION_PAC primary key (NUMERO_ACTION_PUBLICITAIRE, NUMERO_PRODUIT)
 );
 
 /*==============================================================*/
