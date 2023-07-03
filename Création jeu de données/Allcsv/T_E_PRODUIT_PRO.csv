@@ -1,0 +1,29 @@
+NUMERO_PRODUIT,NUMERO_ENSEIGNE,NUMERO_GAMME,NOM_PRODUIT,GEN_CODE
+1,1,9,peinture murale azur,5000000000
+2,1,9,Peinture murale blanche,5000000001
+3,1,9,Peinture murale beige,5000000002
+4,1,9,Peinture murale rose,5000000003
+5,1,9,Peinture murale jaune,5000000004
+6,1,9,Peinture murale rouge,5000000005
+7,1,9,Peinture murale verte,5000000006
+8,1,9,Peinture murale grise,5000000007
+9,1,9,Peinture murale noire,5000000008
+10,1,1,Carrelage imitation pierre,5000000009
+11,1,1,Carrelage imitation bois,5000000010
+12,1,1,Carrelage blanc,5000000011
+13,1,1,Carrelage noir,5000000012
+14,1,2,Papier peint à rayures,5000000013
+15,1,2,Papier peint à fleurs,5000000014
+16,1,2,Papier peint uni,5000000015
+17,1,3,Revêtement de sol en PVC,5000000016
+18,1,3,Revêtement de sol en linoléum,5000000017
+19,1,4,Parquet chêne massif,5000000018
+20,1,4,Parquet stratifié,5000000019
+21,1,4,Parquet en bambou,5000000020
+22,2,5,Faïence blanche,5000000021
+23,2,5,Faïence noire,5000000022
+24,2,5,Faïence à motifs,5000000023
+25,3,6,Moquette beige,5000000024
+26,3,6,Moquette grise,5000000025
+27,3,6,Moquette noire,5000000026
+28,4,7,Peinture à effets métallisée,5000000027
