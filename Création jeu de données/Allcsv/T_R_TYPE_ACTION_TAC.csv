@@ -1,0 +1,11 @@
+NUMERO_TYPE_ACTION,LIBELLE_TYPE_ACTION
+1,Radio 30s
+2,Radio 10s
+3,Télévision 15s
+4,Télévision 30s
+5,Presse écrite 1/2 page
+6,Presse écrite pleine page
+7,Internet bannière
+8,Internet pavé
+9,Cinéma 15s
+10,Cinéma 30s

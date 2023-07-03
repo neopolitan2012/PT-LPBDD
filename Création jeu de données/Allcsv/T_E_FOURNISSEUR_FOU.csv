@@ -1,0 +1,12 @@
+NUMERO_FOURNISSEUR,NUMERO_ENSEIGNE,NUMERO_ADRESSE,NUMERO_GROUPE,NOM_FOURNISSEUR,PRENOM_FOURNISSEUR,TELEPHONE_FOURNISSEUR,MAIL_FOURNISSEUR
+1,8,1,1,Carre,Flavie,0685885486,flaviec@fournisseur.fr
+2,9,2,3,J,Lois,0685995486,lois@fournisseur.fr
+3,1,3,2,Renault,Marie,0688854868,marier@fournisseur.fr
+4,2,4,1,Collet,Florence,0685486887,florencec@fournisseur.fr
+5,2,5,1,Le Blanc,Félix,0688548688,felixl@fournisseur.fr
+6,3,6,2,Barret,Noah,0678888548,noahb@fournisseur.fr
+7,4,7,2,Poullain,Émile,0688548688,emilep@fournisseur.fr
+8,5,8,3,Bourgeois,Léa,0687854868,leab@fournisseur.fr
+9,6,9,4,Pichon,Nathan,0688854868,nathanp@fournisseur.fr
+10,6,10,4,Barron,Émmilie,0788548683,emmilieb@fournisseur.fr
+11,7,11,5,Lefèvre,Alice,0688888888,alicel@fournisseur.fr
