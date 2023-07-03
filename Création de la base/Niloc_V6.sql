@@ -684,7 +684,7 @@ create table T_E_SEMAINE_SEM
    DATE_DEBUT           DATE,
    DATE_FIN             DATE,
    ANNEE                CHAR(4),
-   constraint PK_T_E_SEMAINE_SEM primary key (NUMERO_SEMAINE)
+   constraint PK_T_E_SEMAINE_SEM primary key (NUMERO_SEMAINE,ANNEE)
 );
 
 /*==============================================================*/
