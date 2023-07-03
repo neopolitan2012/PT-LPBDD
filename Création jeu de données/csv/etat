@@ -1,0 +1,44 @@
+--------------------------------------------------------
+--  Fichier créé - lundi-juillet-03-2023   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table T_R_ETAT_ETA
+--------------------------------------------------------
+
+  CREATE TABLE "SYS"."T_R_ETAT_ETA" 
+   (	"NUMERO_ETAT" NUMBER(*,0), 
+	"LIBELLE_ETAT" VARCHAR2(256 BYTE)
+   ) PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into SYS.T_R_ETAT_ETA
+SET DEFINE OFF;
+Insert into SYS.T_R_ETAT_ETA (NUMERO_ETAT,LIBELLE_ETAT) values ('1','en preparation');
+Insert into SYS.T_R_ETAT_ETA (NUMERO_ETAT,LIBELLE_ETAT) values ('2','en attente');
+Insert into SYS.T_R_ETAT_ETA (NUMERO_ETAT,LIBELLE_ETAT) values ('3','en cours');
+Insert into SYS.T_R_ETAT_ETA (NUMERO_ETAT,LIBELLE_ETAT) values ('4','terminee');
+Insert into SYS.T_R_ETAT_ETA (NUMERO_ETAT,LIBELLE_ETAT) values ('5','supprimee');
+--------------------------------------------------------
+--  DDL for Index PK_T_R_ETAT_ETA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS"."PK_T_R_ETAT_ETA" ON "SYS"."T_R_ETAT_ETA" ("NUMERO_ETAT") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table T_R_ETAT_ETA
+--------------------------------------------------------
+
+  ALTER TABLE "SYS"."T_R_ETAT_ETA" MODIFY ("NUMERO_ETAT" NOT NULL ENABLE);
+  ALTER TABLE "SYS"."T_R_ETAT_ETA" ADD CONSTRAINT "PK_T_R_ETAT_ETA" PRIMARY KEY ("NUMERO_ETAT")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
