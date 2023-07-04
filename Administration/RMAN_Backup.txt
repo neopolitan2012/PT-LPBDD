@@ -1,0 +1,28 @@
+#CONFIGURATION :
+#
+#File backup :
+
+/u01/app/oracle/BACKUP
+
+#RMAN Backup location : 
+
+configure channel device type disk format '/u01/app/oracle/BACKUP/backup_%t_%s_%p';
+
+#RETENTION
+
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS; 
+
+#SCRIPT BACKUP : 
+
+vim backup_database.RMAN
+
+#Contenu
+
+connect target PDB_MAIN/oracle
+run {
+	backup database;
+}
+
+#CRONTAB : 
+
+0 0 1 * * rman @/u01/app/oracle/RMAN/backup_database.rman
