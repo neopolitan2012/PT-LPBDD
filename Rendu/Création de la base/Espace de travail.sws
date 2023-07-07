@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?PowerDesigner signature="Workspace" version="16.1.0.3637"?>
+<!-- Veuillez ne pas modifier ce fichier -->
+
+<Workspace>
+	<Local Expanded="Yes">
+		<Model Expanded="Yes" ID="{CA99076A-86E1-4EB0-A168-D0EA6F594EAB}" Name="Nilov_V2" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Niloc.mpd"/>
+	</Local>
+	<BrowserModule Name="Référentiel"/>
+</Workspace>

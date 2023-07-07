@@ -1,0 +1,10 @@
+Select *
+From (
+Select numero_ordre,max(date_historique_etat) as test
+From T_J_Historique_Etat_het het
+Join T_R_ETAT_ETA eta on eta.numero_etat = het.numero_etat
+Group by  numero_ordre
+order by numero_ordre
+)ord 
+Join T_J_Historique_Etat_het het on het.numero_ordre = ord.numero_ordre AND het.date_historique_etat = ord.test
+Join T_R_ETAT_ETA eta on eta.numero_etat = het.numero_etat
